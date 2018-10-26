@@ -1,8 +1,17 @@
 const express = require('express');
-const roter = express.Router();
+var router = express.Router();
 
-roter.get('/',  (req, res)=> {
-    res.json({"meg":"this is my test"})
+router.use('/admin', require(__dirname + '/admin'));
+// router.use('/blog', require(__dirname + '/blog'));
+
+
+router.get('/',  (req, res)=> {
+    res.render('user/home');
 })
 
-module.exports = roter;
+
+router.get('/log',  (req, res)=> {
+    res.render('user/login');
+})
+
+module.exports = router;

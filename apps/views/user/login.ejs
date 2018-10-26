@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+	<%include ../layers/header%>
+ 	<link rel="stylesheet" href="/public/css/log.css">
+</head>
+<body style="width: 100%; height: 100%;  background-color: #6dbfed7d" class="log-body" >
+	<div class="log-body_after">
+		<div class="log">
+			<div class="singin sing active-log">
+				<h2>Welcome</h2>
+				<img class="logo" src="/public/images/logo.png" width="70px" height="70px" alt="Image Logo"></img>
+				<form name="main-form-in" class="main-form-in" method="post" action="/">
+					<fieldset class="form-group">
+						<input type="text" name="username-in" class="form-control" id="username-in" placeholder="Username">
+						<!-- // @username login-->
+						<i class="fas fa-exclamation-circle input-wrong active"></i>
+						<span class="example">User's not exist</span>
+					</fieldset>
+					<fieldset class="form-group">
+						<input type="password" name="password-in" class="form-control" id="password-in" placeholder="Password">
+						<!-- // @password login -->
+						<i class="fas fa-exclamation-circle input-wrong active"></i>
+						<span class="example">Password error</span>
+					</fieldset>
+					<a href="">Forgot you password ?</a>
+
+					<button id="bntLogin">Login</button>
+					<p>Login with facebook or google</p>
+					<div class="icon icon-f">
+						<i class="fab fa-facebook-f"></i>
+					</div>
+					<div class="icon icon-g">
+						<i class="fab fa-google-plus-g"></i>
+					</div>
+					<p id="animation_singin" class="p-sing">You don't have a account !</p>
+				</form>
+			</div>
+			<!-- // @end for form login-->
+			<div class="singnup sing">
+				<img class="logo" src="/public/images/logo.png" width="70px" height="70px" alt="Image Logo"></img>
+				<h2>Register</h2>
+				<form name="main-form-up" class="main-form-up" method="post" action=""> 
+					<fieldset class="form-group">
+						<input type="text" name="name-up" class="form-control" id="name-up" placeholder="Name">
+						<!-- // @name for register-->
+						<i class="fas fa-exclamation-circle input-wrong"></i>
+						<span class="example"></span>
+					</fieldset>
+					<fieldset class="form-group">
+						<input type="text" name="username-up" class="form-control" id="username-up" placeholder="Username">
+						<!-- // @username for register-->
+						<i class="fas fa-exclamation-circle input-wrong"></i>
+						<span class="example"></span>
+					</fieldset>
+					<fieldset class="form-group">
+						<input type="password" name="password-up" class="form-control" id="password-up" placeholder="Password">
+						<!-- // @password for register-->
+						<i class="fas fa-exclamation-circle input-wrong"></i>
+						<span class="example"></span>
+					</fieldset>
+					<fieldset class="form-group">
+						<input type="password" name="re-password-up" class="form-control" id="re-password-up" placeholder="Re-Password">
+						<!-- // @re-password for register-->
+						<i class="fas fa-exclamation-circle input-wrong"></i>
+						<span class="example"></span>
+					</fieldset>
+					<fieldset class="form-group">
+						<input type="text" name="email-up" class="form-control" id="email-up" placeholder="Email">
+						<!-- // @email for register-->
+						<i class="fas fa-exclamation-circle input-wrong"></i>
+						<span class="example"></span>
+					</fieldset>
+					<button id="bntLogup" type="submit" name="submit">Singin</button>
+					<p>Login with facebook or google ?</p>
+					<div class="icon icon-f">
+						<i class="fab fa-facebook-f"></i>
+					</div>
+					<div class="icon icon-g">
+						<i class="fab fa-google-plus-g"></i>
+					</div>
+					<p id="animation_singup" class="p-sing">You have a account !</p>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="/public/js/log.js"></script>
+</html>
