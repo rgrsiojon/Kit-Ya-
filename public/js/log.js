@@ -135,6 +135,48 @@ $(function(){
 	 			}
 			});
 		});
+
+		$('#bntLogin').click(function() {
+			$('form.main-form-in').submit(function() {
+				const pass_reg = new RegExp (/^(?=.*[A-z])(?=.*[0-9]).{8,16}$/);
+				var arrError_in = new Array();
+				// @check username
+	 			if ($('#username-in').val().trim().length === 0) {
+	 				$('#username-in').next().addClass('active');
+	 				arrError_in[0] = 'Enter username !';
+	 			} 
+
+	 			var username_in = $('#username-in').val().trim().match(/([A-Za-z0-9_]{1,15})/img);
+
+				if ($('#username-in').val().trim().length !== 0 && username_in[0]!== $('#username-in').val().trim()) {
+					$('#username-in').next().addClass('active');
+	 				arrError_in[0] = 'A-z, 0-9, length < 16';
+				} 
+
+				// @check password
+	 			if ($('#password-in').val().trim().length === 0) {
+	 				$('#password-in').next().addClass('active');
+	 				arrError_in[1] = 'Enter password !';
+	 			} 
+	 			// @check password for reg
+	 			if ($('#password-in').val().trim().length !== 0 && !pass_reg.test($('#password-in').val().trim())) {
+					$('#password-in').next().addClass('active');
+			 		arrError_in[1] = 'A-z, 0-9, {8,16}';
+				}
+
+				if (arrError_in.length !== 0) {
+	 				if (arrError_in[0]) {
+	 					$('#username-in').next().next().text(arrError_in[0]);
+	 				}
+	 				if (arrError_in[1]) {
+	 					$('#password-in').next().next().text(arrError_in[1]);
+	 				}
+	 				return false;
+	 			} else {
+	 				return true;
+	 			}
+			});
+		});
 	}
 
 })  

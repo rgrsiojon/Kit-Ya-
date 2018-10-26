@@ -6,12 +6,12 @@ router.use('/admin', require(__dirname + '/admin'));
 
 
 router.get('/',  (req, res)=> {
-    res.render('user/home');
+    res.render('user/home', {data:{}});
 })
 
 
 router.get('/log',  (req, res)=> {
-    res.render('user/login');
+    res.render('user/login', {data:{}});
 })
 
 module.exports = router;

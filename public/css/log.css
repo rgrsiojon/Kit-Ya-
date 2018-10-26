@@ -91,8 +91,8 @@ i.fas.fa-exclamation-circle.input-wrong {
 
 i.fas.fa-exclamation-circle.input-wrong.active {
 	opacity: 1;
-    visibility: visible;
-    z-index: 2;
+	visibility: visible;
+	z-index: 2;
 }
 
 i.fas.fa-exclamation-circle.input-wrong:hover {

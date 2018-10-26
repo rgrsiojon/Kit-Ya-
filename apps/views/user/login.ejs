@@ -9,17 +9,19 @@
 			<div class="singin sing active-log">
 				<h2>Welcome</h2>
 				<img class="logo" src="/public/images/logo.png" width="70px" height="70px" alt="Image Logo"></img>
-				<form name="main-form-in" class="main-form-in" method="post" action="/">
+				<form name="main-form-in" class="main-form-in" method="post" action="">
 					<fieldset class="form-group">
 						<input type="text" name="username-in" class="form-control" id="username-in" placeholder="Username">
 						<!-- // @username login-->
-						<i class="fas fa-exclamation-circle input-wrong active"></i>
+						<i class="fas fa-exclamation-circle input-wrong"></i>
 						<span class="example">User's not exist</span>
+						<!-- <span class="example"></span> -->
 					</fieldset>
 					<fieldset class="form-group">
 						<input type="password" name="password-in" class="form-control" id="password-in" placeholder="Password">
 						<!-- // @password login -->
-						<i class="fas fa-exclamation-circle input-wrong active"></i>
+						<i class="fas fa-exclamation-circle input-wrong"></i>
+						<!-- <span class="example">Password error</span> -->
 						<span class="example">Password error</span>
 					</fieldset>
 					<a href="">Forgot you password ?</a>
