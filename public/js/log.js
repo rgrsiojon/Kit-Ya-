@@ -138,7 +138,7 @@ $(function(){
 
 		$('#bntLogin').click(function() {
 			$('form.main-form-in').submit(function() {
-				const pass_reg = new RegExp (/^(?=.*[A-z])(?=.*[0-9]).{8,16}$/);
+				const pass_reg_in = new RegExp (/^(?=.*[A-z])(?=.*[0-9]).{8,16}$/);
 				var arrError_in = new Array();
 				// @check username
 	 			if ($('#username-in').val().trim().length === 0) {
@@ -159,7 +159,7 @@ $(function(){
 	 				arrError_in[1] = 'Enter password !';
 	 			} 
 	 			// @check password for reg
-	 			if ($('#password-in').val().trim().length !== 0 && !pass_reg.test($('#password-in').val().trim())) {
+	 			if ($('#password-in').val().trim().length !== 0 && !pass_reg_in.test($('#password-in').val().trim())) {
 					$('#password-in').next().addClass('active');
 			 		arrError_in[1] = 'A-z, 0-9, {8,16}';
 				}
