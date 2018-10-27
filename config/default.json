@@ -1,15 +1,11 @@
 {
-	"server":{
-		"host":"0.0.0.0",
-		"port": 5000
+	"admin": {
+		"username":"rgrsiojon@gmail.com",
+		"password":"Cunc0njinkai99"
 	},
-	"mysql":{
-		"host":"localhost",
-		"port":"3306",
-		"user":"root",
-	    "password" : "",
-	    "database" : "blog"
+	"mongoose": {
+		"user":"roger",
+		"password":"cunc0njinkai99"
 	},
-	"salt":10,
-	"keyboard":"rogersuccess"
+	"salt":10
 }

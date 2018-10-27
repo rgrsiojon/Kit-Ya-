@@ -1,4 +1,5 @@
 const express = require('express');
+const database = require('../modules/database-user');
 var router = express.Router();
 
 router.use('/admin', require(__dirname + '/admin'));
@@ -14,11 +15,13 @@ router.get('/log',  (req, res)=> {
 })
 
 router.post('/log',  (req, res)=> {
+	
 	var user =  req.body;
 	// @check user
 	if(!user) {
 		res.render('error', {data:{}})
 	} else {
+
 		if (user.id_up) {
 			var arrayErr = new Array();
 			// @check name
@@ -59,9 +62,10 @@ router.post('/log',  (req, res)=> {
 			// @arrayErr[3]:  error for re-password
 			// @arrayErr[4]:  error for email
 			// @arrayErr[5]:  check error
-
+			console.log('tét');
 			if(arrayErr) {
-				var listerr = {
+				// @data has been error
+				const listerr = {
 					name:arrayErr[0],
 					username:arrayErr[1],
 					password:arrayErr[2],
@@ -70,19 +74,27 @@ router.post('/log',  (req, res)=> {
 					err: arrayErr[5]
 				}
 				res.render('user/login', {data:listerr})
-			} else {
-				data = {
-					name: user.name_up,
-					name: user.username_up,
-					name: user.password_up,
-					name: user.re_password_up,
-					name: user.email_up
-				}
-				console.log('ok');
-			    res.render('user/login', {data:{}});
 			}
+
+
+			const dataUser = {
+				nameuser: user.name_up,
+				username: user.username_up,
+				password: user.password_up,
+				email: user.email_up
+			}
+			// @insert database
+			// var success = database.insert(dataUser);
+			// success.then((result)=>{
+			// 	res.render('home', {data:{}})
+			// }).catch((err)=>{
+			// 	res.render('error', {data:{}})
+			// }) 
+
+			res.render('user/login', {data:{}})
+			
 		} else {
-			console.log('ok');
+			
 		}
 			
 
