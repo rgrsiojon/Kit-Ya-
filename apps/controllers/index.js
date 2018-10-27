@@ -19,7 +19,7 @@ router.post('/log',  (req, res)=> {
 	var user =  req.body;
 	// @check user
 	if(!user) {
-		res.render('error', {data:{}})
+		// res.render('error', {data:{}})
 	} else {
 
 		if (user.id_up) {
@@ -62,7 +62,6 @@ router.post('/log',  (req, res)=> {
 			// @arrayErr[3]:  error for re-password
 			// @arrayErr[4]:  error for email
 			// @arrayErr[5]:  check error
-			console.log('tét');
 			if(arrayErr) {
 				// @data has been error
 				const listerr = {
@@ -94,7 +93,7 @@ router.post('/log',  (req, res)=> {
 			res.render('user/login', {data:{}})
 			
 		} else {
-			
+			res.render('home', {data:{}})
 		}
 			
 
