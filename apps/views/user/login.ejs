@@ -11,18 +11,19 @@
 				<img class="logo" src="/public/images/logo.png" width="70px" height="70px" alt="Image Logo"></img>
 				<form name="main-form-in" class="main-form-in" method="post" action="">
 					<fieldset class="form-group">
-						<input type="text" name="username-in" class="form-control" id="username-in" placeholder="Username">
+						<input type="hidden" name="id_in" class="form-control" id="id-in" value="2">
+						<input type="text" name="username_in" class="form-control" id="username-in" placeholder="Username">
 						<!-- // @username login-->
 						<i class="fas fa-exclamation-circle input-wrong"></i>
-						<span class="example">User's not exist</span>
+						<span class="example"></span>
 						<!-- <span class="example"></span> -->
 					</fieldset>
 					<fieldset class="form-group">
-						<input type="password" name="password-in" class="form-control" id="password-in" placeholder="Password">
+						<input type="password" name="password_in" class="form-control" id="password-in" placeholder="Password">
 						<!-- // @password login -->
 						<i class="fas fa-exclamation-circle input-wrong"></i>
 						<!-- <span class="example">Password error</span> -->
-						<span class="example">Password error</span>
+						<span class="example"></span>
 					</fieldset>
 					<a href="">Forgot you password ?</a>
 
@@ -38,39 +39,41 @@
 				</form>
 			</div>
 			<!-- // @end for form login-->
-			<div class="singnup sing">
+
+			<div class="singnup sing <%if(data && data.err) {%> active-log <%}%>">
 				<img class="logo" src="/public/images/logo.png" width="70px" height="70px" alt="Image Logo"></img>
 				<h2>Register</h2>
 				<form name="main-form-up" class="main-form-up" method="post" action=""> 
 					<fieldset class="form-group">
-						<input type="text" name="name-up" class="form-control" id="name-up" placeholder="Name">
+						<input type="hidden" name="id_up" class="form-control" id="id-up" value="1">
+						<input type="text" name="name_up" class="form-control" id="name-up" placeholder="Name">
 						<!-- // @name for register-->
-						<i class="fas fa-exclamation-circle input-wrong"></i>
-						<span class="example"></span>
+						<i class="fas fa-exclamation-circle input-wrong <%if(data && data.name) {%> active<%}%> "></i>
+						<span class="example"><%if(data && data.name) {%> <%= data.name%> <%}%></span>
 					</fieldset>
 					<fieldset class="form-group">
-						<input type="text" name="username-up" class="form-control" id="username-up" placeholder="Username">
+						<input type="text" name="username_up" class="form-control" id="username-up" placeholder="Username">
 						<!-- // @username for register-->
-						<i class="fas fa-exclamation-circle input-wrong"></i>
-						<span class="example"></span>
+						<i class="fas fa-exclamation-circle input-wrong <%if(data && data.username) {%> active<%}%> "></i>
+						<span class="example"><%if(data && data.username) {%> <%= data.username%> <%}%></span>
 					</fieldset>
 					<fieldset class="form-group">
-						<input type="password" name="password-up" class="form-control" id="password-up" placeholder="Password">
+						<input type="password" name="password_up" class="form-control" id="password-up" placeholder="Password">
 						<!-- // @password for register-->
-						<i class="fas fa-exclamation-circle input-wrong"></i>
-						<span class="example"></span>
+						<i class="fas fa-exclamation-circle input-wrong <%if(data && data.password) {%> active<%}%> "></i>
+						<span class="example"><%if(data && data.password) {%> <%= data.password%> <%}%></span>
 					</fieldset>
 					<fieldset class="form-group">
-						<input type="password" name="re-password-up" class="form-control" id="re-password-up" placeholder="Re-Password">
+						<input type="password" name="re_password_up" class="form-control" id="re-password-up" placeholder="Re-Password">
 						<!-- // @re-password for register-->
-						<i class="fas fa-exclamation-circle input-wrong"></i>
-						<span class="example"></span>
+						<i class="fas fa-exclamation-circle input-wrong <%if(data && data.re_password) {%> active<%}%> "></i>
+						<span class="example"><%if(data && data.re_password) {%> <%= data.re_password%> <%}%></span>
 					</fieldset>
 					<fieldset class="form-group">
-						<input type="text" name="email-up" class="form-control" id="email-up" placeholder="Email">
+						<input type="text" name="email_up" class="form-control" id="email-up" placeholder="Email">
 						<!-- // @email for register-->
-						<i class="fas fa-exclamation-circle input-wrong"></i>
-						<span class="example"></span>
+						<i class="fas fa-exclamation-circle input-wrong <%if(data && data.email) {%> active<%}%> "></i>
+						<span class="example"><%if(data && data.email) {%> <%= data.email%> <%}%></span>
 					</fieldset>
 					<button id="bntLogup" type="submit" name="submit">Singin</button>
 					<p>Login with facebook or google ?</p>

@@ -23,6 +23,7 @@ $(function(){
 
 			$('.singnup').removeClass('show');
 			$('.singnup').removeClass('hidden');
+			$('.singnup').removeClass('active-log');
 
 			$('.singin').addClass('hidden');
 			$('.singnup').addClass('show');
@@ -31,11 +32,13 @@ $(function(){
 
 		$('#animation_singup').click(function() {
 			$('html, body').animate({scrollTop: 0}, 600)
+			$('.singin').removeClass('active-log');
 			$('.singin').removeClass('show');
 			$('.singin').removeClass('hidden');
 
 			$('.singnup').removeClass('show');
 			$('.singnup').removeClass('hidden');
+			$('.singnup').removeClass('active-log');
 
 			$('.singnup').addClass('hidden');
 			$('.singin').addClass('show');
@@ -49,9 +52,11 @@ $(function(){
 		$('#bntLogup').click(function() {
 			$('form.main-form-up').submit(function() {
 
-				const email_reg = new RegExp(/^[A-z0-9._%+-]+@[A-z0-9.-]+\.[A-z]{2,4}$/);
-				const pass_reg = new RegExp (/^(?=.*[A-z])(?=.*[0-9]).{8,16}$/);
-				const name_reg = new RegExp (/^(?=.*[A-z])(?=.*[0-9]).{8,16}$/);
+				const email_reg = new RegExp(/^([a-z0-9_.-]+)@([\da-z.-]+).([a-z.]{2,6})$/);
+				const pass_reg = new RegExp (/^[A-z0-9_-]{8,18}$/);
+				const name_reg = new RegExp (/^[A-z ,.'-]+$/i);
+				const user_reg = new RegExp (/^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/);
+
 				var arrError = new Array();
 				// @check name
 	 			if ($('#name-up').val().trim().length === 0) {
@@ -59,24 +64,19 @@ $(function(){
 	 				arrError[0] = 'Enter name !';
 	 			}
 
-				var name = $('#name-up').val().trim().match(/([A-Za-z0-9_]{1,15})/img);
-
-				if ($('#name-up').val().trim().length !== 0 && name[0]!== $('#name-up').val().trim()) {
+				if ($('#name-up').val().trim().length !== 0 &&  !name_reg.test($('#name-up').val().trim())) {
 					$('#name-up').next().addClass('active');
-	 				arrError[0] = 'A-z, 0-9, length < 16';
+	 				arrError[0] = 'A-z, 3 < length < 16';
 				} 
-
 	 			// @check username
 	 			if ($('#username-up').val().trim().length === 0) {
 	 				$('#username-up').next().addClass('active');
 	 				arrError[1] = 'Enter username !';
 	 			} 
 
-	 			var username = $('#username-up').val().trim().match(/([A-Za-z0-9_]{1,15})/img);
-
-				if ($('#username-up').val().trim().length !== 0 && username[0]!== $('#username-up').val().trim()) {
+				if ($('#username-up').val().trim().length !== 0 &&  !user_reg.test($('#username-up').val().trim())) {
 					$('#username-up').next().addClass('active');
-	 				arrError[1] = 'A-z, 0-9, length < 16';
+	 				arrError[1] = 'A-z, 8 < length < 20';
 				} 
 
 	 			// @check password
@@ -87,8 +87,9 @@ $(function(){
 	 			// @check password for reg
 	 			if ($('#password-up').val().trim().length !== 0 && !pass_reg.test($('#password-up').val().trim())) {
 					$('#password-up').next().addClass('active');
-			 		arrError[2] = 'A-z, 0-9, {8,16}';
+			 		arrError[2] = 'A-z, 0-9, {8,18}';
 				}
+
 				// @check password for repeat
 	 			if ($('#re-password-up').val().trim().length === 0) {
 	 				$('#re-password-up').next().addClass('active');
@@ -106,10 +107,9 @@ $(function(){
 	 			}
 	 			if($('#email-up').val().trim().length !== 0 && !email_reg.test($('#email-up').val().trim())){
 					$('#email-up').next().addClass('active');
-	 				arrError[4] = 'A-z0-9@A-z0-9.A-z !';
+	 				arrError[4] = 'A-z0-9_-@A-z0-9.A-z !';
 				}
-	 			
-
+	 		
 	 			if (arrError.length !== 0) {
 	 				$("html, body").animate({ scrollTop: 150 }, 400);
 	 				if (arrError[0]) {
@@ -138,7 +138,8 @@ $(function(){
 
 		$('#bntLogin').click(function() {
 			$('form.main-form-in').submit(function() {
-				const pass_reg_in = new RegExp (/^(?=.*[A-z])(?=.*[0-9]).{8,16}$/);
+				const pass_reg_in = new RegExp (/^[A-z0-9_-]{8,18}$/);
+				const user_reg_in = new RegExp (/^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/);
 				var arrError_in = new Array();
 				// @check username
 	 			if ($('#username-in').val().trim().length === 0) {
@@ -146,11 +147,9 @@ $(function(){
 	 				arrError_in[0] = 'Enter username !';
 	 			} 
 
-	 			var username_in = $('#username-in').val().trim().match(/([A-Za-z0-9_]{1,15})/img);
-
-				if ($('#username-in').val().trim().length !== 0 && username_in[0]!== $('#username-in').val().trim()) {
+				if ($('#username-in').val().trim().length !== 0 &&  !user_reg_in.test($('#username-in').val().trim())) {
 					$('#username-in').next().addClass('active');
-	 				arrError_in[0] = 'A-z, 0-9, length < 16';
+	 				arrError_in[0] = 'A-z, 8 < length < 20';
 				} 
 
 				// @check password
@@ -158,13 +157,13 @@ $(function(){
 	 				$('#password-in').next().addClass('active');
 	 				arrError_in[1] = 'Enter password !';
 	 			} 
-	 			// @check password for reg
+
 	 			if ($('#password-in').val().trim().length !== 0 && !pass_reg_in.test($('#password-in').val().trim())) {
 					$('#password-in').next().addClass('active');
-			 		arrError_in[1] = 'A-z, 0-9, {8,16}';
+			 		arrError_in[1] = 'A-z, 0-9, {8,18}';
 				}
 
-				if (arrError_in.length !== 0) {
+				if (arrError_in[0] || arrError_in[1]) {
 	 				if (arrError_in[0]) {
 	 					$('#username-in').next().next().text(arrError_in[0]);
 	 				}
