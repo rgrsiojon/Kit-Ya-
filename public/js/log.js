@@ -51,6 +51,7 @@ $(function(){
 		$('.singnup .input-wrong').removeClass('ClickInput');
 		$('#bntLogup').click(function() {
 			$('form.main-form-up').submit(function() {
+				// return true
 				const email_reg = new RegExp(/^([a-z0-9_.-]+)@([\da-z.-]+).([a-z.]{2,6})$/);
 				const pass_reg = new RegExp (/^[A-z0-9_-]{8,18}$/);
 				const name_reg = new RegExp (/^[A-z ,.'-]+$/i);
@@ -139,6 +140,8 @@ $(function(){
 		
 
 			$('form.main-form-in').submit(function() {
+
+				// return true
 				const pass_reg_in = new RegExp (/^[A-z0-9_-]{8,18}$/);
 				const user_reg_in = new RegExp (/^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/);
 				var arrError_in = new Array();

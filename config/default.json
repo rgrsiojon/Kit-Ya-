@@ -1,11 +1,8 @@
 {
-	"admin": {
-		"username":"rgrsiojon@gmail.com",
-		"password":"Cunc0njinkai99"
-	},
 	"mongoose": {
 		"user":"roger",
 		"password":"cunc0njinkai99"
 	},
-	"salt":10
+	"salt":10,
+	"keyboard":"rgrsiojon"
 }

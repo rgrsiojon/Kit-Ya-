@@ -1,5 +1,5 @@
 const express = require('express');
-// const config = require('config');
+const config = require('config');
 const bodyParser = require('body-parser');
 const app = express();
 // const host = config.get("server.host");
@@ -12,10 +12,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // @trust first proxy
-
 app.set('trust proxy', 1) 
+
 app.use(session({
-  secret: 'roger',
+  secret: config.get("keyboard"),
   resave: false,
   saveUninitialized: true,
   cookie: { secure: false }

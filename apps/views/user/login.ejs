@@ -9,21 +9,24 @@
 			<div class="singin sing active-log">
 				<h2>Welcome</h2>
 				<img class="logo" src="/public/images/logo.png" width="70px" height="70px" alt="Image Logo"></img>
-				<form name="main-form-in" class="main-form-in" method="post" action="">
+				<div class="alert alert-success" role="alert" <%if(!data || !data.success){%> style="display: none;"<%}%>>
+					<strong>Well done!</strong> <%if(data && data.success){%><%= data.success%><%}%>
+				</div>
+				<form name="main-form-in" class="main-form-in" method="post" action="/log">
 					<fieldset class="form-group">
 						<input type="hidden" name="id_in" class="form-control" id="id-in" value="2">
-						<input type="text" name="username_in" class="form-control" id="username-in" placeholder="Username">
+						<input type="text" name="username_in" class="form-control" id="username-in" placeholder="Username" <%if(data.username_in) {%>value="<%=data.username_in%>" <%}%> >
 						<!-- // @username login-->
-						<i class="fas fa-exclamation-circle input-wrong"></i>
-						<span class="example"></span>
+						<i class="fas fa-exclamation-circle input-wrong <%if(data.username_err_in){%> active <%}%> "></i>
+						<span class="example"><%if(data.username_err_in){%> <%=data.username_err_in%> <%}%> </span>
 						<!-- <span class="example"></span> -->
 					</fieldset>
 					<fieldset class="form-group">
 						<input type="password" name="password_in" class="form-control" id="password-in" placeholder="Password">
 						<!-- // @password login -->
-						<i class="fas fa-exclamation-circle input-wrong"></i>
+						<i class="fas fa-exclamation-circle input-wrong <%if(data.password_err_in){%> active <%}%>"></i>
 						<!-- <span class="example">Password error</span> -->
-						<span class="example"></span>
+						<span class="example"><%if(data.password_err_in){%><%=data.password_err_in%><%}%></span>
 					</fieldset>
 					<a href="">Forgot you password ?</a>
 
@@ -43,16 +46,16 @@
 			<div class="singnup sing <%if(data && data.err) {%> active-log <%}%>">
 				<img class="logo" src="/public/images/logo.png" width="70px" height="70px" alt="Image Logo"></img>
 				<h2>Register</h2>
-				<form name="main-form-up" class="main-form-up" method="post" action=""> 
+				<form name="main-form-up" class="main-form-up" method="post" action="/log"> 
 					<fieldset class="form-group">
 						<input type="hidden" name="id_up" class="form-control" id="id-up" value="1">
-						<input type="text" name="name_up" class="form-control" id="name-up" placeholder="Name">
+						<input type="text" name="name_up" class="form-control" id="name-up" placeholder="Name" <%if(data && data.StrNamme) {%> value=" <%=data.StrNamme%>"<%}%> >
 						<!-- // @name for register-->
 						<i class="fas fa-exclamation-circle input-wrong <%if(data && data.name) {%> active<%}%> "></i>
 						<span class="example"><%if(data && data.name) {%> <%= data.name%> <%}%></span>
 					</fieldset>
 					<fieldset class="form-group">
-						<input type="text" name="username_up" class="form-control" id="username-up" placeholder="Username">
+						<input type="text" name="username_up" class="form-control" id="username-up" placeholder="Username" <%if(data && data.StrUserName) {%> value=" <%=data.StrUserName%>"<%}%> >
 						<!-- // @username for register-->
 						<i class="fas fa-exclamation-circle input-wrong <%if(data && data.username) {%> active<%}%> "></i>
 						<span class="example"><%if(data && data.username) {%> <%= data.username%> <%}%></span>
@@ -70,7 +73,7 @@
 						<span class="example"><%if(data && data.re_password) {%> <%= data.re_password%> <%}%></span>
 					</fieldset>
 					<fieldset class="form-group">
-						<input type="text" name="email_up" class="form-control" id="email-up" placeholder="Email">
+						<input type="text" name="email_up" class="form-control" id="email-up" placeholder="Email"  <%if(data && data.StrEmail) {%> value=" <%=data.StrEmail%>"<%}%>  >
 						<!-- // @email for register-->
 						<i class="fas fa-exclamation-circle input-wrong <%if(data && data.email) {%> active<%}%> "></i>
 						<span class="example"><%if(data && data.email) {%> <%= data.email%> <%}%></span>

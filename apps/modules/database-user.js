@@ -27,25 +27,41 @@ function insert(data) {
     username: data.username,
     password: data.password,
     email: data.email
-	})
+  })
   var defer = q.defer();
   newUser.save((err, result)=>{
-    
+
     if (err) {
       defer.reject(err);
     } else {
       defer.resolve(result);
     }
-   
+
   });
 
   return defer.promise;
 
 }
 
-
+function getUserByS(user_name) {
+  if (user_name) {
+    var defer = q.defer();
+    user.findOne({username:user_name},(err, users)=>{
+      if (err) {
+        defer.reject(err)
+      } else {
+        defer.resolve(users)
+      }
+    })
+    return defer.promise;
+  } else {
+    return false
+  }
+  
+}
 module.exports = {
-  insert:insert
+  insert:insert,
+  getUserByS:getUserByS
 }
 
 
