@@ -14,8 +14,9 @@ const object = new Schema({
   password: { type: String},
   email: { type: String},
   img: { type: String, default:'default.png'},
-  age: { type: Number, min: 18, default: ''},
-  job: { type: String, default: '' },
+  age: { type: Number, default: ''},
+  tel: { type: Number, default: ''},
+  address: { type: String, default: ''},
   dateJoin: { type: Date, default: Date.now }
 });
 
@@ -57,11 +58,29 @@ function getUserByS(user_name) {
   } else {
     return false
   }
-  
 }
+
+function upDateUser(name, data) {
+  if (name && data) {
+    var defer = q.defer();
+    user.update({username: name}, data, (err, result)=> {
+      if (err) {
+          defer.reject(err)
+      } else {
+          defer.resolve(result)
+      }
+    });
+    
+    return defer.promise;
+  } else {
+    return false
+  }
+}
+
 module.exports = {
   insert:insert,
-  getUserByS:getUserByS
+  getUserByS:getUserByS,
+  upDateUser:upDateUser
 }
 
 

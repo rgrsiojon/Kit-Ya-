@@ -1,34 +1,12 @@
-const mongoose = require('mongoose');
-
-mongoose.connect('mongodb://roger:cunc0njinkai99@ds143573.mlab.com:43573/listuer');
 
 
-const Schema = mongoose.Schema;
- 
-const BlogPost = new Schema({
-    title: String,
-    body: String
-});
+const age_reg = /^[0-9]{1,2}$/;
 
-const MyModel = mongoose.model('Ticket', BlogPost);
+var str = '12124sdgkl';
 
-
-// const instance = new MyModel({
-// 	title: 'titel',
-//     body: 'body'
-// });
-// instance.save(function (err) {
-//     if (!err) {
-//     	console.log('ok');
-//     } else {
-//     	console.log('wrong');
-//     }
-// });
-
-MyModel.find({title: 'titel2'}, function (err, docs) {
- 	if (!err) {
- 		console.log(docs);
- 	} else {
- 		console.log('wrong');
- 	}
-});
+// if (age_reg.test(str) == str ) {
+// 	console.log('ok');
+// } 
+if () {
+	console.log('ok');
+} 

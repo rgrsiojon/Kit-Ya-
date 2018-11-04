@@ -21,6 +21,10 @@ app.use(session({
   cookie: { secure: false }
 }))
 
+// app.use((req,res, next)=>{
+// 	res.render('fix', {data:{}})
+// })
+
 app.set('views', (__dirname + "/apps/views"));
 app.set('view engine', 'ejs');
 

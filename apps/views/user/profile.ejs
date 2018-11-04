@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<% include ../layers/header.ejs%>
+ 	<link rel="stylesheet" href="/public/css/profile.css">
+</head>
+<body>
+	<!-- <div class="loading">
+		<div class="content">
+			<img src="images/logo.png" width="90px" alt="">
+			<ul class="list-load">
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+			</ul>
+		</div>
+	</div>
+	 -->
+	<div class="profile">
+		<div class="menu">
+			<div class="controller">
+				<i class="fas fa-bars bars-black" id="bars"></i>
+			</div>
+			<div id="menu-bar" class="menu-bar">
+				<ul>
+					<a href="" class="item-bar">
+						<li><i class="fas fa-house-damage"></i>Home</li>
+					</a>
+					<a href="" class="item-bar">
+						<li><i class="fas fa-envelope"></i>Message</li>
+					</a>
+					<a href="" class="item-bar">
+						<li><i class="fas fa-users"></i>Orthers</li>
+					</a>
+					<a href="" class="item-bar"> 
+						<li><i class="fas fa-info-circle"></i>About</li>
+					</a>
+					<a href="" class="item-bar">
+						<li><i class="fas fa-file-contract"></i>Contact</li>
+					</a>
+				</ul>
+			</div>
+			
+		</div>
+
+		<div id="table-user">
+			<div class="image" style="background-image: url(/public/images/avartar.jpg);">
+				<img src="" alt="">
+				<a href=""><i class="fas fa-pen-square"></i></a>
+			</div>
+			<h4 id="name" class="text-xs-center"></h4>
+			<div id="info">
+				<ul>
+					<a href="">
+						<li>Info</li>
+					</a>
+					<a href="">
+						<li>Skill</li>
+					</a>
+					<a href="">
+						<li>List Products</li>
+					</a>
+				</ul>
+			</div>
+		</div>
+
+		<div class="content">
+			<h4 class="display-4" id="name"> <%if(data.name) {%> <%=data.name%> <%}%> </h4>
+			<div class="treet"><img src="images/logo.png" alt=""></div>
+			<div class="info">
+				<div id="fullname">
+					<form name="main-form" method="post" action="" id="form-user">
+						<fieldset class="form-group">
+							<label for="formGroupExampleInput">Full name</label>
+							<hr>
+							<input type="text" class="form-control" id="name_full" placeholder="Full Name" maxlength="20" <%if(data.name) {%> value="<%=data.name%>" <%}%> >
+							<i class="fas fa-times-circle "></i>
+						</fieldset>
+						<fieldset class="form-group">
+							<label for="">Age</label>
+							<hr>
+							<input type="text" class="form-control" id="age" placeholder="age" maxlength="2" <%if(data.age) {%> value="<%=data.age%>" <%}%> >
+							<i class="fas fa-times-circle"></i>
+						</fieldset>
+						<fieldset class="form-group">
+							<label for="">Email</label>
+							<hr>
+							<input type="text" class="form-control" id="email" placeholder="Email" maxlength="30" <%if(data.email) {%> value="<%=data.email%>" <%}%> >
+							<i class="fas fa-times-circle"></i>
+						</fieldset>
+						<fieldset class="form-group">
+							<label for="">Tel</label>
+							<hr>
+							<input type="text|number" class="form-control" id="tel" placeholder="Number" maxlength="12" <%if(data.tel) {%> value="<%=data.tel%>" <%}%>  >
+							<i class="fas fa-times-circle"></i>
+						</fieldset>
+						<fieldset class="form-group">
+							<label for="">Address</label>
+							<hr>
+							<input type="text" class="form-control" id="address" placeholder="Address" maxlength="35" <%if(data.address) {%> value="<%=data.address%>" <%}%>>
+							<i class="fas fa-times-circle"  ></i>
+						</fieldset>
+						<fieldset class="form-group">
+							<div id="edit">
+								<button class="btn" id="submit-user">Save</button>
+							</div>
+						</fieldset>
+					</form>
+				</div>
+				<div id="experience">
+					<h4 class="display-4">Experience</h4>
+					<div class="treet"><img src="images/logo.png" alt=""></div>
+					<form name="form-exp" id="form-exp" method="post" action="">
+						
+						<%if(exper){%>
+
+
+						<fieldset class="form-group lg-l" id="fieldset-1">
+							<!-- this is input -->
+							<input type="text" class="form-control exper" id="exper-1" placeholder="Some titel" name="titel_1" value="">
+							<!-- end for input -->
+							<p style="text-align: center;color: #66bded;clear: both; padding-bottom: 7px;;">What do you do ?</p>
+							<input type="hidden" class="form-control" id="id-1" value="1">
+							<i class="fas fa-save wranning" id="i-somethingtext-1"></i>
+							<!-- this is input -->
+							<input type="text" name="somethingtext_1" class="form-control" id="somethingtext-1" placeholder="Something... length < 37" maxlength="36">
+							<div class="block"></div>
+							<input type="date" class="date" id="date-1" name="date_1" placeholder="date">
+
+							<!-- end for input -->
+							<!-- <i class="fas fa-plus-circle plus add-exper" ></i> -->
+
+						</fieldset>
+
+						<fieldset class="form-group lg-r" id="fieldset-2">
+							<!-- this is input -->
+							<input type="text" class="form-control exper" id="exper-2" placeholder="Some titel" name="titel_2" value="">
+							<!-- end for input -->
+							<p style="text-align: center;color: #66bded;clear: both; padding-bottom: 7px;;">What do you do ?</p>
+							<input type="hidden" class="form-control" id="id-2" value="2">
+							<i class="fas fa-save wranning" id="i-somethingtext-2"></i>
+							<!-- this is input -->
+							<input type="text" name="somethingtext_2" class="form-control" id="somethingtext-2" placeholder="Something... length < 37" maxlength="36">
+							<div class="block"></div>
+							<input type="date" class="date" id="date-2" name="date_1" placeholder="date">
+
+							<!-- end for input -->
+							<i class="fas fa-plus-circle plus add-exper" ></i>
+
+						</fieldset>
+
+
+
+						<%}%>
+
+
+					</form>
+						
+					<div class="form-btn-my">
+						<button class="btn" type="submit" id="submit-exper">Save</button>
+					</div>
+						
+				</div>
+
+				<div class="joindate">
+					<i class="fas fa-calendar-alt"></i><p>Join at 12:00 AM 12/12/2012</p>
+				</div>
+			</div> <!-- end info -->
+		
+		</div>
+	</div>
+		
+ 	<!-- <script type="text/javascript" src="TweenMax.min.js"></script> -->
+	<script type="text/javascript" src="/public/js/profile.js"></script>
+
+
+</body>   
+</html>
+
+
+
+

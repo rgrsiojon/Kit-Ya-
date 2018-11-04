@@ -1,22 +1,21 @@
 const express = require('express');
-const database = require('../modules/database-user');
+const database_user = require('../modules/database-user');
+const database_exper = require('../modules/database-expre');
 const hash = require('../modules/hash');
 const session = require('express-session');
+const q = require('q');
 var router = express.Router();
 
 router.use('/admin', require(__dirname + '/admin'));
 // router.use('/blog', require(__dirname + '/blog'));
 
-
 router.get('/',  (req, res)=> {
 	if(req.session.user) {
 		user = req.session.user;
-		console.log(user);
 		res.render('user/home', {data:user});
 	} else {
 		res.render('user/login', {data:{}});
 	}
-    
 })
 
 router.get('/log',  (req, res)=> {
@@ -48,7 +47,7 @@ router.post('/log',  (req, res)=> {
 				arrayErr[2] = 'Enter password';
 				arrayErr[5] = 'err';
 			}
-			// @check re-password
+			// @ check re-password
 
 			if (!user.re_password_up || user.re_password_up.length===0) {
 				arrayErr[3] = "Emter re-password";
@@ -91,7 +90,7 @@ router.post('/log',  (req, res)=> {
 				email: user.email_up
 			}
 
-			database.getUserByS(user.username_up).then((users)=> {
+		 database_user.getUserByS(user.username_up).then((users)=> {
 				if (users.username) {
 					const listerr = {
 						username:"Username's exist",
@@ -105,8 +104,8 @@ router.post('/log',  (req, res)=> {
 					res.render('error', {data:{titel: "Error", content: "Error ! So sorry"}})
 				}
 			}).catch((err)=>{
-				// @insert database
-				var success = database.insert(dataUser);
+				// @insert database_user
+				var success = database_user.insert(dataUser);
 				success.then((result)=>{
 					res.render('user/login', {data:{success:"Successfully !"}})
 				}).catch((err)=>{
@@ -139,7 +138,7 @@ router.post('/log',  (req, res)=> {
 				res.render('user/login', {data:listerr})
 			}
 
-			database.getUserByS(user.username_in).then((users)=> {
+		 database_user.getUserByS(user.username_in).then((users)=> {
 				if (hash.Comparepass(user.password_in, users.password)) {
 					req.session.user = users;
 					res.render('user/home', {data:{user:users}});
@@ -159,6 +158,70 @@ router.post('/log',  (req, res)=> {
 			})
 		}
 	}
+})
+
+router.get('/home/profile', (req, res)=>{
+	if (req.session.user) {
+	    res.render('user/profile', {data:req.session.user, exper:{}})
+	} else {
+	    res.render('user/login', {data:{}});
+	}
+})
+
+router.post('/home/profile', (req, res)=>{
+	var exper = req.body;
+	if (req.session.user) {
+	    username = req.session.user.username;
+		database_user.upDateUser(username, exper.data).then((result)=>{
+			res.render('user/profile', {data:req.session.user})
+		}).cacth((err)=> {
+			res.render('error', {data:{titel: "Error", content: "Error ! Can not edited !"}})
+		})
+
+	} else {
+	    res.render('error', {data:{titel: "Error", content: "Error ! Can not loaded !"}})
+	}
+})
+
+router.post('/home/profile/save', (req, res)=>{
+	var exper = req.body;
+	
+	async function Parser(exper) {
+		var data = {
+			username: req.session.user.username,
+			list_exp: new Array
+		}
+
+		if (exper ) {
+			
+			exper.titel_exp.forEach((i)=>{
+				if (i === '') {
+					return;
+				} 
+				var tmp = {
+					date: i.date,
+					titel: i.titel,
+					list: new Array 
+				}
+				exper.list_exp.forEach((j)=> {
+					if (i.id === j.id) {
+						tmp.list.push(j.text)
+					}
+				})
+				data.list_exp.push(tmp)
+			})
+		} 
+		return Promise.resolve(data);
+	}
+	Parser(exper).then((data)=> {
+		database_exper.Insert(data).then((result)=> {
+			// @fisnish here
+			console.log('ok');
+		}).catch((err)=> {
+			console.log('error');
+		})
+	})
+
 })
 
 router.get('*', (req, res)=>{

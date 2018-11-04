@@ -8,7 +8,6 @@ function hashPassword(pass) {
 }
 
 function Comparepass(pass, hashpass) {
-	console.log('test');
 	var compare = bcrypt.compareSync(pass, hashpass);
 	return compare;
 }
