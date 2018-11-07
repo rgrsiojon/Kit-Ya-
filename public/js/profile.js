@@ -236,7 +236,7 @@ $(function(){
  			}
 
  			var age = parseInt($('#age').val().trim())
- 			if (!age && $('#age').val().trim().length !== 0) {
+ 			if (age < 17 || !age || age > 65) {
  			    $('#age').next().addClass('active');
  				arrError[0]='err';
  			}
@@ -251,12 +251,6 @@ $(function(){
 				$('#email').next().addClass('active');
  				arrError[0]='err';
 			}
-
-			// @check tel
-			// if ($('#tel').val().trim().length === 0 ) {
- 		// 		$('#tel').next().addClass('active');
- 		// 		arrError[0]='err';
- 		// 	}
 
  			if (!(9<= $('#tel').val().trim().length <=11) && $('#tel').val().trim().length !== 0) {
  				$('#tel').next().addClass('active');

@@ -138,7 +138,7 @@ router.post('/log',  (req, res)=> {
 				res.render('user/login', {data:listerr})
 			}
 
-		 database_user.getUserByS(user.username_in).then((users)=> {
+		 	database_user.getUserByS(user.username_in).then((users)=> {
 				if (hash.Comparepass(user.password_in, users.password)) {
 					req.session.user = users;
 					res.render('user/home', {data:{user:users}});
@@ -173,8 +173,14 @@ router.post('/home/profile', (req, res)=>{
 	if (req.session.user) {
 	    username = req.session.user.username;
 		database_user.upDateUser(username, exper.data).then((result)=>{
-			res.render('user/profile', {data:req.session.user})
-		}).cacth((err)=> {
+			database_user.getUserByS(username).then((users)=> {
+				req.session.user = users;
+				res.render('user/profile', {data:users, exper:{}})
+			}).catch((err)=>{
+				res.render('error', {data:{titel: "Error", content: "Error ! Can not edited !"}})
+			})
+			
+		}).catch((err)=> {
 			res.render('error', {data:{titel: "Error", content: "Error ! Can not edited !"}})
 		})
 
