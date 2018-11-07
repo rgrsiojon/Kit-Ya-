@@ -4,7 +4,7 @@
 	<% include ../layers/header.ejs%>
  	<link rel="stylesheet" href="/public/css/profile.css">
 </head>
-<body>
+<body style="min-width:900px">
 	<!-- <div class="loading">
 		<div class="content">
 			<img src="images/logo.png" width="90px" alt="">
@@ -66,7 +66,7 @@
 		</div>
 
 		<div class="content">
-			<h4 class="display-4" id="name"> <%if(data.name) {%> <%=data.name%> <%}%> </h4>
+			<h4 class="display-4"> <%if(data.name) {%> <%=data.name%> <%}%> </h4>
 			<div class="treet"><img src="images/logo.png" alt=""></div>
 			<div class="info">
 				<div id="fullname">

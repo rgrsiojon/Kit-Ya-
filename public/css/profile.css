@@ -313,7 +313,7 @@ div#experience {
 }
 
 #experience fieldset.form-group.lg-r {
-    transform: translateX(417.19px);
+    transform: translateX(420.19px);
     border: none;
     border-left: 1px solid #f5875c;
     padding: 0px;
@@ -340,7 +340,7 @@ div#experience {
 
 #fullname form {
     text-align: left;
-    padding: 0px 204px;
+    padding: 0 20%;
 }
 
 .treet {
@@ -410,14 +410,17 @@ fieldset.form-group:last-child {
 }
 
 h4#name {
+    opacity: 1;
+    transition: 0.4s;
     text-align: center;
     margin: 21px 0px;
     margin-bottom: 16px;
+    visibility: visible;
 }
 
 .content {
     text-align: center;
-    width: 62%;
+    width: 842px;
     position: absolute;
     background-color: #fafafa;
     top: 65px;
@@ -427,6 +430,7 @@ h4#name {
     padding: 12px 0px;
     box-shadow: 0px 0px 45px #607D8B;
     margin-bottom: 100px;
+    margin-right: 82px;
 }
 
 #table-user .image a {
@@ -443,6 +447,7 @@ h4#name {
 }
 
 #table-user .image {
+    transition: 0.4s;
     width: 200px;
     height: 200px;
     background-color: black;
@@ -457,7 +462,10 @@ h4#name {
 
 
 div#info {
+    opacity: 1;
+    visibility: visible;
     text-align: left;
+    transition: 0.4s;
     margin-top: 43px;
 }
 
@@ -489,6 +497,7 @@ div#info {
 }
 
 div#table-user {
+    transition: 0.4s;
     text-align: center;
     width: 301px;
     position: fixed;
@@ -611,6 +620,105 @@ html, body {
     z-index: 10;
     color: #607D8B;
 }
+
+@media  (max-width: 1288px) {
+	div#table-user {
+    background: transparent;
+    box-shadow: none;
+}
+	#table-user .image {
+    cursor: pointer;
+    position: fixed;
+    top: 1%;
+    right: 1%;
+    width: 65px;
+    height: 65px;
+}
+	#table-user .image a {
+    opacity: 0;
+    visibility: hidden;
+}
+	h4#name {
+    opacity: 0;
+    visibility: hidden;
+}
+	div#info {
+    opacity: 0;
+    visibility: hidden;
+}
+
+}
+
+@media  (max-width: 1070px) {
+	.content {
+    width: 81%;
+    text-align: center;
+}
+#experience fieldset.form-group {
+    border: none;
+    border-left: 1px solid #f47948;
+    width: 70%;
+    margin-left: 246px;
+}
+#experience fieldset.form-group input.exper {
+    text-align: left !important;
+    float: left !important;
+}
+#experience fieldset.form-group p {
+    text-align: left !important;
+}
+#experience fieldset.form-group i.fas.wranning {}
+#experience fieldset.form-group input {
+    text-align: left !important;
+}
+#experience fieldset.form-group .block {
+    right: 99.35% !important;
+}
+#experience fieldset.form-group .block i.fas.fa-minus-circle {
+}
+#experience fieldset.form-group input.date {
+    right: 100.5% !important;
+    text-align: center !important;
+}
+#experience fieldset.form-group.lg-r {
+    transform: translateX(0);
+}
+.content .info #experience form fieldset.form-group i.add-exper {
+    right: 93.2%;
+}
+.content .info #experience form fieldset.form-group.lg-r i.add-exper {
+    right: 98.5%;
+}
+#experience fieldset.form-group.lg-r p {}
+#experience fieldset.form-group.lg-l p i.fas.fa-times {
+    float: right;
+    transform: translateY(-75%) translateX(-148px) scale(1);
+}
+#experience fieldset.form-group.lg-l p:hover i {
+    transform: translateY(-75%) translateX(-51px) scale(1.1) !important;
+}
+#experience fieldset.form-group.lg-l i.wranning.show {
+    transform: translateX(-49px) translateY(7px);
+}
+#experience fieldset.form-group.lg-r input {
+    margin-top: 11px;
+}
+#experience fieldset.form-group.lg-r i.fas.show {
+    transform: translateX(343px) translateY(2px);
+}
+#fullname form {}
+}
+
+#experience fieldset.form-group input {
+	background: transparent !important;
+}
+
+@media  (max-width: 836px) {
+	.content {
+    width: 645px;
+}
+}
+
 /*
 #8fdd3c green
 

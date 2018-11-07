@@ -1,9 +1,9 @@
 $(function(){
 	MenuFunction();
 	// Loadding();
-
 	SubmitForm();
 	key();
+	add_expre();
 
 	function key(){
 		$('form').keypress(function(event) {
@@ -21,10 +21,7 @@ $(function(){
 		});
 	}
 
-	add_expre();
-
 	function add_expre() {
-
 		var fieds = $('.content .info #experience form fieldset.form-group');
 		var vitri = 'r';
 
@@ -35,31 +32,13 @@ $(function(){
 		$('.content .info #experience form fieldset.form-group i.add-exper').click(function() {
 			$('.content .info #experience form fieldset.form-group').last().after(`
 				<fieldset class="form-group lg-${vitri}" id="fieldset-${fieds.length+1}">
-
-							<!-- this is input -->
 							<input type="text" class="form-control exper" id="exper" placeholder="" value="Some Titel">
-							<!-- end for input -->
-							<!-- <p style="clear: both;display: none;"></p> -->
-							<p style="text-align: center;color: #66bded;clear: both; padding-bottom: 7px;;">What do you do ?</p>
-							<!-- <p style="clear: both;" data-key=""><i class="fas fa-times"></i> có  khả năng xử lý uni </p> -->
-							<!-- <p style="clear: both;" data-key=""><i class="fas fa-times"></i> có  x </p> -->
-							
-							
+							<p style="text-align: center;color: #66bded;clear: both; padding-bottom: 7px;;">What do you do ?</p>							
 							<i class="fas fa-save wranning"></i>
-							<!-- <i class="fas fa-exclamation-triangle wranning"></i> -->
-
-							<!-- this is input -->
-							<input type="text" class="form-control" id="" placeholder="Something... length < 37" maxlength="36">
-							<!-- <i class="fas fa-plus-circle plus" ></i> <--</-->
-							
+							<input type="text" class="form-control" id="" placeholder="Something... length < 37" maxlength="36">							
 							<div class="block"><i class="fas fa-stop-circle"></i></div>
 							<input type="date" class="date" id="date" placeholder="date">
-
-							<!-- end for input -->
-
 							<i class="fas fa-plus-circle plus add-exper" ></i>
-							  
-
 						</fieldset>
 			`);
 
@@ -67,16 +46,15 @@ $(function(){
 			$(this).prev().prev().children().addClass('fa-minus-circle');
 			$(this).remove();
 
-
 			for (var i = 1; i < fieds.length+2; i++) {
 				fnExperience(i);
 				$('#experience #fieldset-'+i+' .block i.fas.fa-minus-circle').click(function() {
 					$(this).parent().parent().remove();
 				});
 			}
+
 			add_expre();
 		});
-
 	}
 
 	async function Parser() {
@@ -84,8 +62,6 @@ $(function(){
 		const p_reg = new RegExp (/^[A-z0-9'\.\,\s\,]+$/i);
 
 		var arr_submit = $('#experience fieldset.form-group');
-		
-		// var arr = new Array();
 
 		for (var i = 0; i < arr_submit.length; i++) {
 			var tmp = new Array;
@@ -94,7 +70,6 @@ $(function(){
 			var list_p = document.querySelectorAll('#experience #fieldset-'+(i+1)+' p')
 			var date = $('#experience #fieldset-'+(i+1)+' #date').val();
 			
-
 			//@ check titel
 			if (titel.trim().length === 0) {
 				var err = "Enter for titel";
@@ -116,7 +91,6 @@ $(function(){
 				tmp.push(list_p[j].textContent)
 			}
 
-			
 			list_exp[i] = {
 				titel: titel,
 				data: date,
@@ -168,8 +142,6 @@ $(function(){
 			})
 
 		});
-
-
 	}
 
 
@@ -315,6 +287,5 @@ $(function(){
 		$('#fullname form input').click(function() {
 			$(this).next().removeClass('active')
 		});
-
 	}
 })
