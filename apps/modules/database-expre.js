@@ -34,8 +34,47 @@ function Insert(data) {
   return defer.promise;
 }
 
+
+function getDataByUser(user) {
+ if (user) {
+    var defer = q.defer();
+    listexpre.findOne({username:user},(err, list)=>{
+      if (err) {
+        defer.reject(err)
+      } else {
+        defer.resolve(list)
+      }
+    })
+    return defer.promise;
+  } else {
+    return false
+  }
+}
+
+
+function upDateData (name, data) {
+  if (name && data) {
+    var defer = q.defer();
+    listexpre.update({username: name}, data, (err, result)=> {
+      if (err) {
+          defer.reject(err)
+      } else {
+          defer.resolve(result)
+      }
+    });
+    
+    return defer.promise;
+  } else {
+    return false
+  }
+}
+
+
+
 module.exports = {
-  Insert:Insert
+  Insert:Insert,
+  getDataByUser:getDataByUser,
+  upDateData:upDateData
 }
 
 

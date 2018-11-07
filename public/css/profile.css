@@ -240,7 +240,7 @@ div#experience {
     width: 10px;
     height: 10px;
     position: absolute;
-    background-color: #607D8B;
+    background-color: #ffffff;
     left: -5px;
     top: 36px;
     border-radius: 15px;
@@ -251,7 +251,7 @@ div#experience {
     width: 10px;
     height: 10px;
     position: absolute;
-    background-color: #607D8B;
+    background-color: #ffffff;
     right: -5px;
     top: 37px;
     border-radius: 15px;
@@ -313,7 +313,7 @@ div#experience {
 }
 
 #experience fieldset.form-group.lg-r {
-    float: right;
+    transform: translateX(417.19px);
     border: none;
     border-left: 1px solid #f5875c;
     padding: 0px;
@@ -558,7 +558,9 @@ div#table-user {
     cursor: pointer;
     transition: 0.4s;
     position: absolute;
+    top: 6px;
     left: 8px;
+    box-shadow: 0px 0px 13px #607D8B;
 }
 
 .menu i#bars:hover {
@@ -577,6 +579,37 @@ html, body {
 #table-user .image img {
     width: 100%;
     height: 100%;
+}
+
+#experience fieldset.form-group.lg-l .block i.fas.fa-minus-circle {
+    font-size: 15px;
+    margin: 0px;
+    transform: translateX(3px) translateY(-2px);
+}
+
+#experience fieldset.form-group.lg-r .block i.fas.fa-minus-circle {
+    font-size: 15px;
+    margin: 0px;
+    transform: translateX(-3px) translateY(-2px);
+}
+
+.content .info #experience form fieldset.form-group.lg-r i.fas.fa-stop-circle {
+    position: absolute;
+    top: -22px;
+    left: -33px;
+    font-size: 18px;
+    z-index: 10;
+    color: #607D8B;
+    cursor: pointer;
+}
+
+.content .info #experience form fieldset.form-group.lg-l i.fas.fa-stop-circle {
+    position: absolute;
+    top: -21px;
+    right: -33px;
+    font-size: 18px;
+    z-index: 10;
+    color: #607D8B;
 }
 /*
 #8fdd3c green

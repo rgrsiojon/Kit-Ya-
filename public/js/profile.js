@@ -3,48 +3,8 @@ $(function(){
 	// Loadding();
 
 	SubmitForm();
-
-
-	function add_expre(i) {
-		var vitri = '';
-		if (i%2==0) {
-			vitri = 'l';
-		} else {
-			vitri = 'r';
-		}
-
-		$('.content .info #experience form fieldset.form-group i.add-exper').click(function() {
-			$('.content .info #experience form fieldset.form-group').last().after(`
-				<fieldset class="form-group lg-${vitri}" id="fieldset-${i+1}">
-					<!-- this is input -->
-					<input type="text" class="form-control exper" id="exper-${i+1}" placeholder="Some titel" name="titel_${i+1}" value="">
-					<!-- end for input -->
-					<p style="text-align: center;color: #66bded;clear: both; padding-bottom: 7px;;">What do you do ?</p>
-					<input type="hidden" class="form-control" id="id-${i+1}" value="${i+1}">
-					<i class="fas fa-save wranning" id="i-somethingtext-${i+1}"></i>
-					<!-- this is input -->
-					<input type="text" name="somethingtext_${i+1}" class="form-control" id="somethingtext-${i+1}" placeholder="Something... length < 37" maxlength="36">
-					<div class="block"></div>
-					<input type="date" class="date" id="date-${i+1}" name="date_1" placeholder="date">
-
-					<!-- end for input -->
-					<i class="fas fa-plus-circle plus add-exper" ></i>
-
-				</fieldset>
-			`)
-			$(this).remove();
-		});
-
-	}
-
-	var arr = $('#experience fieldset.form-group input.exper')
-	add_expre(arr.length);
-	for (var i = 1; i < arr.length +1; i++) {
-		fnExperience('#somethingtext-'+i, '#i-somethingtext-'+i, '#fieldset-'+i, i);
-	}
-
-
 	key();
+
 	function key(){
 		$('form').keypress(function(event) {
 			if (event.keyCode === 13) {
@@ -61,153 +21,209 @@ $(function(){
 		});
 	}
 
+	add_expre();
 
-	function fnExperience(somethingtext, i_somethingtext, fieldset, i) {
-		var giatri = '';
-		var trangthai = 'co gia tri';
-		var dem = 1;
-		setInterval(()=>{
-			if($(somethingtext).val() != '') {
-				if (trangthai == 'co gia tri') {
-					$(somethingtext).prev().addClass('show');
-					trangthai = 'add xong roi'
-				}
-				if ($(somethingtext).val() != giatri) {
-					giatri = $(somethingtext).val();
-					if ($(somethingtext).val().length > 35) {
-						$(somethingtext).prev().removeClass('fa-save');
-						$(somethingtext).prev().addClass('fa-exclamation-triangle');
-					}
-					if ($(somethingtext).val().length <= 35) {
-						$(somethingtext).prev().removeClass('fa-exclamation-triangle');
-						$(somethingtext).prev().addClass('fa-save');
-					}
+	function add_expre() {
 
-				}
+		var fieds = $('.content .info #experience form fieldset.form-group');
+		var vitri = 'r';
+
+		if (fieds.length%2 === 0) {
+			vitri = 'l'
+		} 
+
+		$('.content .info #experience form fieldset.form-group i.add-exper').click(function() {
+			$('.content .info #experience form fieldset.form-group').last().after(`
+				<fieldset class="form-group lg-${vitri}" id="fieldset-${fieds.length+1}">
+
+							<!-- this is input -->
+							<input type="text" class="form-control exper" id="exper" placeholder="" value="Some Titel">
+							<!-- end for input -->
+							<!-- <p style="clear: both;display: none;"></p> -->
+							<p style="text-align: center;color: #66bded;clear: both; padding-bottom: 7px;;">What do you do ?</p>
+							<!-- <p style="clear: both;" data-key=""><i class="fas fa-times"></i> có  khả năng xử lý uni </p> -->
+							<!-- <p style="clear: both;" data-key=""><i class="fas fa-times"></i> có  x </p> -->
+							
+							
+							<i class="fas fa-save wranning"></i>
+							<!-- <i class="fas fa-exclamation-triangle wranning"></i> -->
+
+							<!-- this is input -->
+							<input type="text" class="form-control" id="" placeholder="Something... length < 37" maxlength="36">
+							<!-- <i class="fas fa-plus-circle plus" ></i> <--</-->
+							
+							<div class="block"><i class="fas fa-stop-circle"></i></div>
+							<input type="date" class="date" id="date" placeholder="date">
+
+							<!-- end for input -->
+
+							<i class="fas fa-plus-circle plus add-exper" ></i>
+							  
+
+						</fieldset>
+			`);
+
+			$(this).prev().prev().children().removeClass('fa-stop-circle');
+			$(this).prev().prev().children().addClass('fa-minus-circle');
+			$(this).remove();
+
+
+			for (var i = 1; i < fieds.length+2; i++) {
+				fnExperience(i);
+				$('#experience #fieldset-'+i+' .block i.fas.fa-minus-circle').click(function() {
+					$(this).parent().parent().remove();
+				});
+			}
+			add_expre();
+		});
+
+	}
+
+	async function Parser() {
+		var list_exp = new Array;
+		const p_reg = new RegExp (/^[A-z0-9'\.\,\s\,]+$/i);
+
+		var arr_submit = $('#experience fieldset.form-group');
+		
+		// var arr = new Array();
+
+		for (var i = 0; i < arr_submit.length; i++) {
+			var tmp = new Array;
+
+			var titel = $('#experience #fieldset-'+(i+1)+' #exper').val();
+			var list_p = document.querySelectorAll('#experience #fieldset-'+(i+1)+' p')
+			var date = $('#experience #fieldset-'+(i+1)+' #date').val();
+			
+
+			//@ check titel
+			if (titel.trim().length === 0) {
+				var err = "Enter for titel";
+			    return Promise.reject(err);
 			}
 
-			if($(somethingtext).val() == '') {
-				if (trangthai == 'add xong roi') {
-					$(somethingtext).prev().removeClass('show');
-					trangthai = 'co gia tri';
-				}
+			if (titel.trim().length !== 0 && !(p_reg.test(titel.trim()))) {
+				var err = "Enter for titel";
+			    return Promise.reject(err);
 
 			}
 
-			// DeteleExper(fieldset, i);
+			// @check list
+			for (var j = 1; j < list_p.length; j++) {
+				if (list_p[j].textContent.trim().length !== 0 && !(p_reg.test(list_p[j]))) {
+					var err = "Enter for titel";
+				    return Promise.reject(err);
+				}
+				tmp.push(list_p[j].textContent)
+			}
 
-			$('#experience fieldset.form-group p i.fas.fa-times').click(function() {
-				$(this).parent().remove();
-			});
+			
+			list_exp[i] = {
+				titel: titel,
+				data: date,
+				list: tmp
+			}
+		}
+
+		return Promise.resolve(list_exp);
+	}
+
+	var fieds = $('.content .info #experience form fieldset.form-group');
+
+	for (var i = 1; i < fieds.length+2; i++) {
+		fnExperience(i);
+
+		$('#experience #fieldset-'+i+' .block i.fas.fa-minus-circle').click(function() {
+			$(this).parent().parent().remove();
+			var check = document.querySelectorAll('.content .info #experience form fieldset.form-group');
+
+			for (var j = 0; j < check.length; j++) {
+				check[j].classList.remove('lg-r')
+				check[j].classList.remove('lg-l')
+
+				if (j%2==0) {
+					check[j].classList.add('lg-l');
+					check[j].id = 'fieldset-'+(j+1);
+				} else {
+					check[j].classList.add('lg-r');
+					check[j].id = 'fieldset-'+(j+1);
+				}
+				
+			}
+
+			Parser().then((list_exp)=>{
+				var base_url = location.protocol + "//" + document.domain + ":" + location.port ;
+				$.ajax({
+					url: base_url + '/home/profile/save',
+					type: 'POST',
+					dataType: 'json',
+					data: {data:list_exp},
+					success: function (res) {
+						if (res && res.status_code == 200) {
+							location.reload();
+						}
+					}
+				})
+			}).catch((err)=> {
+				return false
+			})
+
+		});
 
 
-		},50);
+	}
 
-		$(i_somethingtext).click(function() {
-			$('#experience '+fieldset+' p').last().after('<p style="clear: both;" class="_'+i+dem+'" data-key-'+i+dem+'="'+i+dem+'"><i class="fas fa-times _'+i+dem+'" data-key-i-'+i+dem+'="'+i+dem+'"></i> '+$(this).next().val()+' </p>');
+
+	function fnExperience(i) {
+
+		const fn = new RegExp (/^[A-z0-9'\.\,\s\,]+$/i);
+
+		$('#experience fieldset#fieldset-'+i+' input').focus(function() {
+			$(this).prev().addClass('show');
+		});
+
+		$('#experience fieldset#fieldset-'+i+' input').prev().click(function() {
+			if ($(this).next().val() === '') {
+				return false
+			} 
+
+			if($(this).next().val().trim().length !== 0 && !(fn.test($(this).next().val().trim()))){
+				return false
+			}
+				
+			$('#experience fieldset#fieldset-'+i+' p').last().after('<p><i class="fas fa-times"></i>'+$(this).next().val()+'</p>');
 			$(this).next().val('');
-			dem++;
+			$(this).removeClass('show');
+			fnExperience(i);
+			
+			
+		});
 
+		$('#experience fieldset#fieldset-'+i+' p i').click(function() {
+			$(this).parent().remove();
 		});
 	}
 
 	function SubmitForm() {
-		const reg =  new RegExp(/^[A-z0-9'\.\,\s\,]+$/i);
 		$('form#form-user').submit(function() {
 			return false
 		});
-
-		var arr_experence_p = []
-		var arr_submit = $('#experience fieldset.form-group input.exper')
-
-
-		var tmp = {}
-		$('#experience fieldset.form-group i.wranning').click(function() {
-			var id = $(this).prev().val().trim();
-			var something = $('#experience fieldset.form-group input#somethingtext-'+id).val().trim();
-	
-			if (id === 0) {
-			    return false
-			}
-
-
-			if (id !== 0 && !(reg.test(arr[i]))) {
-			    return false
-			}
-
-			if (something === 0) {
-			    return false
-			}
-
-			if (something !== 0 && !(reg.test(arr[i]))) {
-			    return false
-			}
-
-			tmp = {
-				id:id,
-				text:something
-			}
-			
-			arr_experence_p.push(tmp)
-		});
-
 		$('#submit-exper').click(function() {
-			
-			var arr = new Array();
-			
-
-			
-
-			var arr_experence = new Array();
-
-			for (var i = 1; i < arr_submit.length +1; i++) {
-				id = $('#experience fieldset.form-group input#id-'+i).val(),
-				titel = $('#experience fieldset.form-group input#exper-'+i).val(),
-				date = $('#experience fieldset.form-group input#date-'+i).val()
-
-				if (id === 0) {
-				    return false
-				}
-
-				if (id !== 0 && !(reg.test(arr[i]))) {
-				    return false
-				}
-
-				if (titel === 0) {
-				    return false
-				}
-
-				if (titel !== 0 && !(reg.test(arr[i]))) {
-				    return false
-				}
-
-				if (date === 0) {
-				    return false
-				}
-
-				arr_experence[i] = {
-					id: id,
-					titel: titel,
-					date: date
-				}
-			}
-
-			var base_url = location.protocol + "//" + document.domain + ":" + location.port ;
-			$.ajax({
-				url: base_url + '/home/profile/save',
-				type: 'POST',
-				dataType: 'json',
-				data: {
-					titel_exp: arr_experence,
-					list_exp: arr_experence_p
-				},
-				success: function (res) {
-					if (res && res.status_code == 200) {
-						location.reload();
+			Parser().then((list_exp)=>{
+				var base_url = location.protocol + "//" + document.domain + ":" + location.port ;
+				$.ajax({
+					url: base_url + '/home/profile/save',
+					type: 'POST',
+					dataType: 'json',
+					data: {data:list_exp},
+					success: function (res) {
+						if (res && res.status_code == 200) {
+							location.reload();
+						}
 					}
-				}
+				})
+			}).catch((err)=> {
+				return false
 			})
-
 		});
 
 

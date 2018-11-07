@@ -106,11 +106,22 @@ router.post('/log',  (req, res)=> {
 			}).catch((err)=>{
 				// @insert database_user
 				var success = database_user.insert(dataUser);
+
+				var list_exper = {
+					username: dataUser.username,
+				  	list_exp: {titel: "Some titel", data: 12/12/2012, list: []}
+				}
+
 				success.then((result)=>{
-					res.render('user/login', {data:{success:"Successfully !"}})
+					database_exper.Insert(list_exper).then((result)=> {
+							res.render('user/login', {data:{success:"Successfully !"}})
+						}).catch((err)=> {
+						res.render('error', {data:{titel: "Error", content: "Error ! So sorry"}})
+					})
 				}).catch((err)=>{
 					res.render('error', {data:{titel: "Error", content: "Error ! So sorry"}})
 				})
+
 			})
 
 			// res.render('user/login', {data:{}})
@@ -162,7 +173,12 @@ router.post('/log',  (req, res)=> {
 
 router.get('/home/profile', (req, res)=>{
 	if (req.session.user) {
-	    res.render('user/profile', {data:req.session.user, exper:{}})
+
+		database_exper.getDataByUser(req.session.user.username).then((list)=>{
+    		res.render('user/profile', {data:req.session.user, exper:list})
+    	}).catch((err)=>{
+    		res.render('error', {data:{titel: "Error", content: "Error! So Sorry "}})
+    	})
 	} else {
 	    res.render('user/login', {data:{}});
 	}
@@ -191,41 +207,16 @@ router.post('/home/profile', (req, res)=>{
 
 router.post('/home/profile/save', (req, res)=>{
 	var exper = req.body;
-	
-	async function Parser(exper) {
-		var data = {
-			username: req.session.user.username,
-			list_exp: new Array
-		}
-
-		if (exper ) {
-			
-			exper.titel_exp.forEach((i)=>{
-				if (i === '') {
-					return;
-				} 
-				var tmp = {
-					date: i.date,
-					titel: i.titel,
-					list: new Array 
-				}
-				exper.list_exp.forEach((j)=> {
-					if (i.id === j.id) {
-						tmp.list.push(j.text)
-					}
-				})
-				data.list_exp.push(tmp)
-			})
-		} 
-		return Promise.resolve(data);
+	var data = {
+		username: req.session.user.username,
+		list_exp: exper.data
 	}
-	Parser(exper).then((data)=> {
-		database_exper.Insert(data).then((result)=> {
-			// @fisnish here
-			console.log('ok');
-		}).catch((err)=> {
-			console.log('error');
-		})
+
+	database_exper.upDateData(data.username, data).then((result)=> {
+		// @fisnish here
+		res.render('user/profile', {data:req.session.user, exper:data.list_exp})
+	}).catch((err)=> {
+		res.render('error', {data:{titel: "Error", content: "Error ! Can not edited !"}})
 	})
 
 })
