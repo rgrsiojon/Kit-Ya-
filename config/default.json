@@ -1,8 +1,4 @@
 {
-	"mongoose": {
-		"user":"roger",
-		"password":"cunc0njinkai99"
-	},
 	"salt":10,
 	"keyboard":"rgrsiojon"
 }
